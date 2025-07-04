@@ -569,3 +569,16 @@ func TestNaN(t *testing.T) {
 		}
 	}
 }
+
+func TestSingleLineArray(t *testing.T) {
+	expect := "[\"foo\"]"
+
+	val := []string{"foo"}
+	json, _ := json.MarshalIndent(val, "", "  ")
+
+	prettied := Pretty(json)
+
+	if !bytes.Equal(prettied, []byte(expect)) {
+		t.Fatalf("expected '%s', got '%s'", expect, prettied)
+	}
+}
